@@ -35,6 +35,20 @@ def read(filename):
 # =============================================================================
 #                                   Helpers
 # =============================================================================
+linetermdct = {
+    '\r\n': re.compile(r'\r\n')
+    , '\r': re.compile(r'\r(?!\n)')
+    , '\n': re.compile(r'(?<!\r)\n')
+}
+
+def lineterm(text, dct=linetermdct):
+    """Return a string representation of the line term style of the input text.
+    """
+    for style, regex in dct.items():
+        if re.search(regex, text):
+            return style
+    return '\n'
+
 
 def convert_toplevel_docstring(tokens):
     for token in tokens:
@@ -45,17 +59,22 @@ def convert_toplevel_docstring(tokens):
             if text.startswith('"""') or text.startswith("'''"):
                 rawre = re.compile(r'([\"\']{3})Raw\r?\n')
                 text, rawsub = re.subn(rawre, r'\1', text, count=1)
+                term = lineterm(text)
                 startline, startcol = token.start
                 # Starting column MUST be 0
                 if startcol == 0:
                     endline, endcol = token.end
                     lines = ['# ' + line
-                             for line in text.strip('"\' \n').split('\n')]
-                    text = '\n'.join(lines)
+                             for line in text.strip('"\' ' + term).splitlines()]
+                    text = term.join(lines)
                     if rawsub:
-                        fmt = '# <rawcell>\n{0}\n# <codecell>'.format(text)
+                        fmtstr = '# <rawcell>' + term + '{0}' + term + \
+                                 '# <codecell>'
+                        fmt = fmtstr.format(text)
                     else:
-                        fmt = '# <markdowncell>\n{0}\n# <codecell>'.format(text)
+                        fmtstr = '# <markdowncell>' + term + '{0}' + term + \
+                                 '# <codecell>'
+                        fmt = fmtstr.format(text)
                     yield TokenInfo(type=tokenize.COMMENT,
                                     start=(startline, startcol),
                                     end=(endline, endcol),

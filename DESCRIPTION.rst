@@ -16,6 +16,13 @@ __________
 
 Release notes in reverse chronological order:
 
+0.0.3 (2017-10-22)
+  Improved support for input files with Windows-style CRLF terminators. The
+  line terminators of the output now match those of the input.
+
+0.0.2 (2017-10-10)
+  Bugfix release.
+
 0.0.1 (2017-10-08)
   Added support for raw notebook cells and a unit test.
 

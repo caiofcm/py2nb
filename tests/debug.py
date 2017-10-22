@@ -16,7 +16,7 @@ def main():
     args = ap.parse_args()
     # Process
     python_to_notebook(input_filename=args.source,
-                             output_filename=args.destination)
+                       output_filename=args.destination)
 
 if __name__ == '__main__':
     main()
