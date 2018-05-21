@@ -26,14 +26,14 @@ Also,
 Install using `pip`:
 
 ```bash
-pip install git+https://github.com/blueogive/py2nb.git
+pip install git+https://github.com/caiofcm/py2nb.git
 ```
 
 Alternatively, you can create a local clone of this repository and install
 from it:
 
 ```bash
-git clone https://github.com/blueogive/py2nb.git
+git clone https://github.com/caiofcm/py2nb.git
 pip install py2nb/
 ```
 
