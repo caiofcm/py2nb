@@ -1,4 +1,6 @@
 
+'"""\n## Test Default Initial Amount\n\n    A\n    '
+
 #%%
 """Raw
 <script>

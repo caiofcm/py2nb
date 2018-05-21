@@ -56,7 +56,8 @@ def convert_toplevel_docstring(tokens):
         if token.type == tokenize.STRING:
             text = token.string
             # Must be a docstring
-            if text.startswith('"""') or text.startswith("'''"):
+            if text.startswith('"""') or text.startswith("'''") or text.startswith('\'"""'):
+                text = text.replace('\\n', '\n') #For the fake docstring
                 rawre = re.compile(r'([\"\']{3})Raw\r?\n')
                 text, rawsub = re.subn(rawre, r'\1', text, count=1)
                 term = lineterm(text)
