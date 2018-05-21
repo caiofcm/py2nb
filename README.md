@@ -7,6 +7,8 @@ cells. It also converts the specialized comment strings (i.e., `#%%`) that
 for [Visual Studio Code](https://code.visualstudio.com/) interprets
 as cell breaks/divisions into cell breaks in the returned notebook.
 
+- Single modification from blueogive/py2nb fork is to allow my __fake docstring__ obtained from the ast to source converter
+
 ## Why?
 
 I wanted a tool to create user examples that can be executed as normal python
